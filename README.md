@@ -3,7 +3,18 @@
 Commands executed via 'just' in layout.kdl don't terminate when Zellij exits.
 
 
-## Zellij Exit Scenarios
+## Reproducable Test
+
+1. Run `nix develop` to start the "test suite". This starts:
+   1. Tab "Layout" spawn zellij via layout.kdl
+   2. Tab "CLI" spawn same but with "manual" input (simulated here but you could to this manually by typing into a new zellij session)
+2. Wait for everything to complete.
+3. The called `./echo.sh` script should display all 4 server responses
+4. Exit the Zellij via `Ctrl + Q`
+5. After exiting, calling `./echo.sh` shows that the just via layout.kdl command still runs and did not exit as it should.
+
+
+## Result: Zellij Exit Scenarios
 
 The table below shows the behavior of commands when exiting Zellij with `Ctrl+Q`:
 
@@ -17,16 +28,6 @@ The table below shows the behavior of commands when exiting Zellij with `Ctrl+Q`
 The issue is that only the specific combination of layout.kdl + just command fails to exit properly when Zellij is closed. Direct commands in layout.kdl, CLI commands via just, and direct CLI commands all exit properly. 
 
 **Note** that the CLI simulation in this test suite replicates the same behavior as typing the commands manually in a Zellij session.
-
-## Test
-
-1. Run `nix develop` to start the "test suite". This starts:
-   1. Tab "Layout" spawn zellij via layout.kdl
-   2. Tab "CLI" spawn same but with "manual" input (simulated here but you could to this manually by typing into a new zellij session)
-2. Wait for everything to complete.
-3. The called `./echo.sh` script should display all 4 server responses
-4. Exit the Zellij via `Ctrl + Q`
-5. After exiting, calling `./echo.sh` shows that the just via layout.kdl command still runs and did not exit as it should.
 
 
 ## Env
