@@ -1,0 +1,29 @@
+# Issue
+
+Commands executed via 'just' in layout.kdl don't terminate when Zellij exits.
+
+
+## Zellij Exit Scenarios
+
+The table below shows the behavior of commands when exiting Zellij with `Ctrl+Q`:
+
+| Method     | Command Type         | Exits Properly | Command Details                                             |
+| ---------- | -------------------- | -------------- | ----------------------------------------------------------- |
+| Layout KDL | Direct command (bun) | ✅ Yes          | `pane command="bun" { args "server.js" "3000" "..." }`      |
+| Layout KDL | Via just command     | ❌ No           | `pane command="just" { args "dev-layout" }`                 |
+| CLI        | Direct command (bun) | ✅ Yes          | Using `zellij action write-chars "bun server.js 3002 TEST"` |
+| CLI        | Via just command     | ✅ Yes          | Using `zellij action write-chars "just dev-cli"`            |
+
+The issue is that commands started via layout.kdl with just do not exit properly when Zellij is closed, while direct commands and CLI simulation commands do exit properly. Note that the CLI simulation in this test suite replicates the same behavior as typing the commands manually in a Zellij session.
+
+## Test
+
+1. Run `nix develop` to start the "test suite". This starts:
+   1. Tab "Layout" spawn zellij via layout.kdl
+   2. Tab "CLI" spawn same but with "manual" input (simulated here but you could to this manually by typing into a new zellij session)
+2. Wait for everything to complete.
+3. The called `./echo.sh` script should display all 4 server responses
+4. Exit the Zellij via `Ctrl + Q`
+5. After exiting, calling `./echo.sh` shows that the just via layout.kdl command still runs and did not exit as it should.
+
+
