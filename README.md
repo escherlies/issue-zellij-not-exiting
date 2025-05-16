@@ -14,7 +14,9 @@ The table below shows the behavior of commands when exiting Zellij with `Ctrl+Q`
 | CLI        | Direct command (bun) | ✅ Yes          | Using `zellij action write-chars "bun server.js 3002 "Cli -> bun server.js 3002"` |
 | CLI        | Via just command     | ✅ Yes          | Using `zellij action write-chars "just dev-cli"`                                  |
 
-The issue is that commands started via layout.kdl with just do not exit properly when Zellij is closed, while direct commands and CLI simulation commands do exit properly. Note that the CLI simulation in this test suite replicates the same behavior as typing the commands manually in a Zellij session.
+The issue is that only the specific combination of layout.kdl + just command fails to exit properly when Zellij is closed. Direct commands in layout.kdl, CLI commands via just, and direct CLI commands all exit properly. 
+
+**Note** that the CLI simulation in this test suite replicates the same behavior as typing the commands manually in a Zellij session.
 
 ## Test
 
