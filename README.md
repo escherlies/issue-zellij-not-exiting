@@ -7,12 +7,12 @@ Commands executed via 'just' in layout.kdl don't terminate when Zellij exits.
 
 The table below shows the behavior of commands when exiting Zellij with `Ctrl+Q`:
 
-| Method     | Command Type         | Exits Properly | Command Details                                             |
-| ---------- | -------------------- | -------------- | ----------------------------------------------------------- |
-| Layout KDL | Direct command (bun) | ✅ Yes          | `pane command="bun" { args "server.js" "3000" "..." }`      |
-| Layout KDL | Via just command     | ❌ No           | `pane command="just" { args "dev-layout" }`                 |
-| CLI        | Direct command (bun) | ✅ Yes          | Using `zellij action write-chars "bun server.js 3002 TEST"` |
-| CLI        | Via just command     | ✅ Yes          | Using `zellij action write-chars "just dev-cli"`            |
+| Method     | Command Type         | Exits Properly | Command Details                                                                   |
+| ---------- | -------------------- | -------------- | --------------------------------------------------------------------------------- |
+| Layout KDL | Direct command (bun) | ✅ Yes          | `pane command="bun" { args "server.js" "3000" "..." }`                            |
+| Layout KDL | Via just command     | ❌ No           | `pane command="just" { args "dev-layout" }`                                       |
+| CLI        | Direct command (bun) | ✅ Yes          | Using `zellij action write-chars "bun server.js 3002 "Cli -> bun server.js 3002"` |
+| CLI        | Via just command     | ✅ Yes          | Using `zellij action write-chars "just dev-cli"`                                  |
 
 The issue is that commands started via layout.kdl with just do not exit properly when Zellij is closed, while direct commands and CLI simulation commands do exit properly. Note that the CLI simulation in this test suite replicates the same behavior as typing the commands manually in a Zellij session.
 

@@ -14,7 +14,7 @@ zellij action move-tab left
 echo "Step 3: Writing the first command in the current pane"
 # Run the first command in the current pane
 sleep 1
-zellij action write-chars "bun server.js 3002 TEST"
+zellij action write-chars "bun server.js 3002 \"Cli -> bun server.js 3002 ...\""
 
 
 echo "Step 4: Executing the first command"

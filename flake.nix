@@ -51,6 +51,7 @@
               echo "Curling recently spawned servers:"
               echo ""
               echo ""
+              sleep 1
               ./echo.sh
             '';
           };
