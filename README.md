@@ -27,3 +27,12 @@ The issue is that commands started via layout.kdl with just do not exit properly
 5. After exiting, calling `./echo.sh` shows that the just via layout.kdl command still runs and did not exit as it should.
 
 
+## Env
+
+```
+❯ zellij --version
+zellij 0.42.2
+
+❯ uname -av
+Linux nixos 6.12.28 #1-NixOS SMP PREEMPT_DYNAMIC Fri May  9 07:50:53 UTC 2025 x86_64 GNU/Linux
+```

@@ -54,6 +54,12 @@
               ./echo.sh
             '';
           };
+          cli = pkgs.mkShell {
+            buildInputs = buildInputs;
+            shellHook = ''
+              echo "Hello"
+            '';
+          };
         }
       );
 
